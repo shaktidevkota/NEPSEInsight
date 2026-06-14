@@ -4,7 +4,7 @@ import pandas as pd
 import os
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins=["https://nepseinsight.netlify.app"])
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), '..', 'data')
 
