@@ -1,5 +1,5 @@
 /* ── Config ─────────────────────────────────────────────────────────────── */
-const API = 'http://127.0.0.1:5000/api';
+const API = 'https://nepseinsight.onrender.com/api';
 
 const C = {
   red:      '#c0392b', redSoft:   '#e74c3c', redGlow: 'rgba(192,57,43,.18)',
