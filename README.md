@@ -1,91 +1,117 @@
-# NEPSEInsight — Nepal Stock Exchange Dashboard
+# NEPSEInsight
 
-A full-stack stock market analysis dashboard for NEPSE built with **Flask + HTML/CSS/JS**.
+A full-stack stock market analysis dashboard for the **Nepal Stock Exchange (NEPSE)**, built with Flask and vanilla HTML/CSS/JS.
 
-![Phase 2](https://img.shields.io/badge/Phase-2%20Complete-brightgreen) ![Python](https://img.shields.io/badge/Python-3.14-blue) ![Flask](https://img.shields.io/badge/Flask-3.1-lightgrey) ![Chart.js](https://img.shields.io/badge/Chart.js-4.4-orange)
+![Python](https://img.shields.io/badge/Python-3.14-blue?style=flat-square) ![Flask](https://img.shields.io/badge/Flask-3.1-lightgrey?style=flat-square) ![Chart.js](https://img.shields.io/badge/Chart.js-4.4-orange?style=flat-square) ![Power BI](https://img.shields.io/badge/Power%20BI-Report-yellow?style=flat-square)
+
+---
+
+## Overview
+
+NEPSEInsight provides a real-time-style view of NEPSE market activity — index trends, sector performance, top movers, and individual stock analysis — all in a clean dark-themed interface.
+
+The project also includes a companion Power BI report for business intelligence-style exploration of the same dataset.
+
+---
+
+## Features
+
+- **Market Summary** — NEPSE index with live change indicator, turnover, market cap, traded shares, and market breadth bar
+- **60-Day Index Trend** — Line chart with MA7 and MA30 moving average overlays
+- **Top Gainers & Losers** — Today's top 5 movers with price, change, and volume
+- **Sector Performance** — Bar chart comparing average % change across all sectors
+- **Stocks Table** — All 33 listed stocks with sector tags, 52-week high/low, and search filter
+- **Candlestick Modal** — Click any stock to view its 30-day OHLC chart with volume
+- **Power BI Report** — Interactive sector slicer, stocks table, and performance chart (`NEPSEInsight.pbix`)
+
+---
 
 ## Project Structure
 
 ```
-nepse-dashboard/
+NEPSEInsight/
 ├── backend/
-│   ├── app.py              # Flask REST API (8 endpoints)
+│   ├── app.py              # Flask REST API
 │   └── requirements.txt
 ├── frontend/
-│   ├── index.html          # Single-page dashboard
-│   ├── style.css           # Dark theme, Nepal crimson accent
-│   └── app.js              # Chart.js charts + fetch API
+│   ├── index.html          # Dashboard UI
+│   ├── style.css           # Dark theme styling
+│   └── app.js              # Chart.js visualizations
 ├── data/
-│   ├── nepse_stocks.csv    # 33 NEPSE stocks with price data
+│   ├── nepse_stocks.csv    # 33 stocks with price data
 │   ├── nepse_index.csv     # 60-day NEPSE index history
-│   └── nepse_ohlc.csv      # 30-day OHLC data per stock (990 rows)
+│   └── nepse_ohlc.csv      # 30-day OHLC data per stock
+├── NEPSEInsight.pbix       # Power BI report
 └── README.md
 ```
 
-## Quickstart
+---
 
-### 1. Install Python dependencies
+## Getting Started
+
+### Prerequisites
+- Python 3.10+
+- VS Code with Live Server extension
+
+### Installation
+
 ```bash
-cd backend
+# Clone the repo
+git clone https://github.com/shaktidevkota/NEPSEInsight.git
+cd NEPSEInsight
+
+# Install dependencies
 pip install flask flask-cors pandas
-```
 
-### 2. Start the Flask API
-```bash
+# Start the backend
+cd backend
 python app.py
-# Running on http://127.0.0.1:5000
 ```
 
-### 3. Open the frontend
-Open `frontend/index.html` with VS Code Live Server  
-*(Right-click → Open with Live Server)*
+Then open `frontend/index.html` with Live Server in VS Code.
+
+The dashboard will be live at `http://127.0.0.1:5500/frontend/index.html`.
+
+---
 
 ## API Endpoints
 
-| Endpoint | Description |
-|---|---|
-| `GET /api/summary` | Market summary — NEPSE index, turnover, breadth |
-| `GET /api/gainers` | Top 5 gaining stocks |
-| `GET /api/losers` | Top 5 losing stocks |
-| `GET /api/sectors` | Sector-wise avg. % change |
-| `GET /api/index-history` | 60-day NEPSE index + MA7 + MA30 |
-| `GET /api/stocks` | All 33 stocks |
-| `GET /api/stocks/<SYMBOL>` | Single stock detail |
-| `GET /api/ohlc/<SYMBOL>` | 30-day OHLC candlestick data |
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/summary` | Market summary — index, turnover, breadth |
+| GET | `/api/gainers` | Top 5 gaining stocks |
+| GET | `/api/losers` | Top 5 losing stocks |
+| GET | `/api/sectors` | Sector-wise average % change |
+| GET | `/api/index-history` | 60-day index with MA7 & MA30 |
+| GET | `/api/stocks` | All stocks |
+| GET | `/api/stocks/<SYMBOL>` | Single stock detail |
+| GET | `/api/ohlc/<SYMBOL>` | 30-day OHLC candlestick data |
 
-## Features
-
-### Phase 1 ✅
-- NEPSE Index hero with change indicator and market breadth bar
-- 30-day index trend chart
-- Top 5 gainers & losers tables
-- Sector performance bar chart
-- Searchable full stocks table with 52-week range
-
-### Phase 2 ✅
-- 60-day index trend with **MA7** and **MA30** moving average overlays
-- **Candlestick modal** — click any stock row to view 30-day OHLC chart + volume
-- 33 stocks across 6 sectors with realistic price history
-- New OHLC API endpoint
-
-### Phase 3 — Power BI (Coming Soon)
-- Export cleaned CSV → import to Power BI Desktop
-- Build a 1-page report with slicers by sector and date
+---
 
 ## Tech Stack
 
-| Layer | Tool |
+| Layer | Technology |
 |---|---|
-| Backend | Python 3.14, Flask 3.1, Pandas |
-| Frontend | HTML5, CSS3, Vanilla JS |
+| Backend | Python, Flask, Pandas |
+| Frontend | HTML5, CSS3, Vanilla JavaScript |
 | Charts | Chart.js 4.4 |
-| Data | Sample CSV (replace with Sharesansar / nepse-live) |
+| BI Report | Microsoft Power BI Desktop |
+| Data | Sample CSV (Sharesansar-compatible format) |
 
-## Screenshots
-> Add screenshots here after running the dashboard locally
+---
 
-## Future Improvements
-- Wire up `nepse-live` Python package for real NEPSE data
-- Add authentication and user watchlists
-- Deploy backend to Render or Railway
-- Deploy frontend to Netlify
+## Roadmap
+
+- [ ] Integrate `nepse-live` for real-time NEPSE data
+- [ ] Add user watchlist with local storage
+- [ ] Deploy backend to Render or Railway
+- [ ] Deploy frontend to Netlify
+
+---
+
+## Author
+
+**Shakti Devkota**  
+BSc. CSIT · Bhaktapur Multiple Campus  
+[Portfolio](https://shakti-devkota.netlify.app) · [GitHub](https://github.com/shaktidevkota)
